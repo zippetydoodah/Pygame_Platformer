@@ -45,9 +45,11 @@ class Player:
                 self.move_right = False
 
     def move(self):
-        self.y += self.y_axis_velocity # y axis movement i.e. gravity and velocity
+        
+             # y axis movement i.e. gravity and velocity
         self.y_axis_velocity += gravity
-
+        self.y += self.y_axis_velocity
+        
         if self.move_left:
             self.x -= 1
 
@@ -63,6 +65,9 @@ class Player:
             self.move_down = False
         else:
             self.move_down = True
+
+
+        self.y = min(565,self.y) # simulating a floor, (the y axis is inverted top is 0 bottom is 600 (565 accounting for width.))
 
     def collisions(self,platforms): # collisions, probs rly bad, but it works for rectangle based sprites, if having complex sprites/images use pixel perfect collision.
         for platform in platforms:
@@ -128,7 +133,7 @@ def generate():
     return platforms
 
 platforms = generate()
-player = Player(20,500)
+player = Player(20,300)
 
 while exit:
 
